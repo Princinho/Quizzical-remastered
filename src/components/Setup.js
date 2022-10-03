@@ -1,15 +1,8 @@
 import React from "react"
 
 export default function Setup(props) {
-    const [categories, setCategories] = React.useState([])
     
-    React.useEffect(() => {
-        //recuperer les categories
-        console.log('fetching categories')
-        fetch('https://opentdb.com/api_category.php')
-            .then(res => res.json())
-            .then(data => setCategories(data.trivia_categories))
-    }, [])
+    
 
     function handleChange(event) {
         const { value, name } = event.target;
@@ -18,7 +11,7 @@ export default function Setup(props) {
 
     return (
         <>
-            {categories.length > 0 &&
+            {props.categories.length > 0 &&
                 <div className="setup-options">
 
                     <label htmlFor="questions">Number of questions</label>
@@ -41,7 +34,7 @@ export default function Setup(props) {
                     <label htmlFor="category">Categories</label>
                     <select id="category" name="category" onChange={handleChange} value={props.settings.category}>
                         <option value="" >Any</option>
-                        {categories.map(cat => {
+                        {props.categories.map(cat => {
                             return <option value={cat.id} key={cat.id}>{cat.name}</option>
                         })}
                     </select>
