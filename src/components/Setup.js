@@ -5,6 +5,7 @@ export default function Setup(props) {
     
     React.useEffect(() => {
         //recuperer les categories
+        console.log('fetching categories')
         fetch('https://opentdb.com/api_category.php')
             .then(res => res.json())
             .then(data => setCategories(data.trivia_categories))
@@ -21,7 +22,7 @@ export default function Setup(props) {
                 <div className="setup-options">
 
                     <label htmlFor="questions">Number of questions</label>
-                    <select id="questions" name="questions" onChange={handleChange}>
+                    <select id="questions" name="questions" onChange={handleChange} value={props.settings.questions}>
                         <option value={5}>5</option>
                         <option value={7}>7</option>
                         <option value={10}>10</option>
@@ -29,7 +30,7 @@ export default function Setup(props) {
 
 
                     <label htmlFor="difficulty">Difficulty level</label>
-                    <select id="difficulty" name="difficulty" onChange={handleChange}>
+                    <select id="difficulty" name="difficulty" onChange={handleChange} value={props.settings.difficulty}>
                         <option value={""}>Any difficulty</option>
                         <option value={"easy"}>Easy</option>
                         <option value={"medium"}>Medium</option>
@@ -38,7 +39,7 @@ export default function Setup(props) {
 
 
                     <label htmlFor="category">Categories</label>
-                    <select id="category" name="category" onChange={handleChange}>
+                    <select id="category" name="category" onChange={handleChange} value={props.settings.category}>
                         <option value="" >Any</option>
                         {categories.map(cat => {
                             return <option value={cat.id} key={cat.id}>{cat.name}</option>

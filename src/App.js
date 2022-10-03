@@ -49,12 +49,16 @@ function App() {
     setShowSetupScreen(false)
     setGameStarted(true)
   }
+  function resetGame(){
+    setGameStarted(false)
+    setShowSetupScreen(true)
+  }
 
   return (
     <div className="app">
       {showSplash && <Splash hideSplash={hideSplash} />}
       {showSetupScreen && <Setup settings={settings} startGame={startGame} updateSettings={updateSettings} />}
-      {(gameStarted && quizzQuestions.length > 0) && <Quizz data={quizzQuestions} />}
+      {(gameStarted && quizzQuestions.length > 0) && <Quizz data={quizzQuestions} resetGame={resetGame} />}
     </div>
   );
 }

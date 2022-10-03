@@ -167,3 +167,13 @@ button {
     margin: 2em 1em; 
     justify-self: center;
 }
+.answer.selected.error{
+background-color: #F6D9DB;
+}
+.answer.ignored{
+    border: 0.771045px solid #A1A9CC;
+    color: #8F94AF;
+}
+.correct,.answer.answer.selected.correct{
+    background: #94D7A2;    
+}
