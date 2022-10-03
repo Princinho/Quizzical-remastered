@@ -9,14 +9,13 @@ export default function Setup(props) {
             .then(res => res.json())
             .then(data => setCategories(data.trivia_categories))
     }, [])
-    
+
     function handleChange(event) {
         const { value, name } = event.target;
         props.updateSettings(name,value)
     }
 
     return (
-
         <>
             {categories.length > 0 &&
                 <div className="setup-options">
