@@ -18,9 +18,11 @@ body {
     background-size: cover;
     background-position: top;
 }
-:focus{
+
+:focus {
     outline: 4px solid #4D5B9E;
 }
+
 img {
     width: 100%;
 }
@@ -64,7 +66,7 @@ button {
     cursor: pointer;
 }
 
-.splash button {
+.splash button,.btn-check-answers {
     padding: 1em 1.8em;
 
 }
@@ -72,17 +74,20 @@ button {
 .splash button:active {
     box-shadow: inset 2px 2px 4px #2c2c2c;
 }
-.setup-options{
-    
+
+.setup-options {
+
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(3,3em) 5em;
+    grid-template-rows: repeat(3, 3em) 5em;
     gap: 1em;
 }
-.setup-options label{
+
+.setup-options label {
     font-size: 1.4rem;
 }
-.setup-options select{
+
+.setup-options select {
     border: 2px solid #293264;
     border-radius: .4em;
     padding: .5em;
@@ -90,19 +95,75 @@ button {
     font-family: "Karla";
     font-size: 1em;
 }
-.setup-options option{
+
+.setup-options option {
     font-family: "Karla";
     font-size: 1em;
 }
-.setup-options button{
+
+.setup-options button {
     grid-column: 1/-1;
     align-self: end;
     justify-self: center;
     padding: 1em 2em;
-    transition: all  200ms ;
-    
+    transition: all 200ms;
+
 }
+
 .setup-options button:hover,
-.setup-options button:focus{
+.setup-options button:focus {
     transform: scale(1.2);
+}
+
+
+.quizz-div{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+}
+
+.answers {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.answer {
+    background: none;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: .8rem;
+    line-height: 12px;
+    text-align: center;
+    border: 1px solid #4D5B9E;
+    border-radius: .5rem;
+    padding: .5em;
+    color: #293264;
+    margin: 0 1em;
+}
+.answer:first-child{
+    margin-left: 0;
+}
+.answer:last-child{
+    margin-right: 0;
+}
+.answer.selected{
+    background-color: #D6DBF5;
+}
+.question {
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #293264;
+    margin-bottom: 1em;
+}
+.quizz-question-wrapper{
+    margin-bottom: 1em;
+    grid-column: 1/-1;
+}
+.btn-check-answers{
+    grid-column: 2 /span 3;
+    margin: 2em 1em; 
+    justify-self: center;
 }
