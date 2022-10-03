@@ -1,11 +1,12 @@
 import {decode} from 'html-entities';
 export default function Quizz(props) {
+    const [questions,setQuestions]=React.useState(props.data)
     return (<div className="quizz-div">
-        {props.data.map(q => {
+        {questions(q => {
             return (
-                <div>
-                    <p>{decode(q.question)}</p>
-                    <div>
+                <div className='quizz-question-wrapper'>
+                    <p className='question'>{decode(q.question)}</p>
+                    <div className='answers'>
                         {q.options.map(opt=><button>{decode(opt.answer)}</button>)}
                     </div>
                 </div>)
