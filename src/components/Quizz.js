@@ -3,9 +3,10 @@ import { decode } from 'html-entities';
 export default function Quizz(props) {
     const [questions, setQuestions] = React.useState(props.data)
     const [submitted, setSubmitted] = React.useState(false)
+    const [score,setScore]=React.useState(0)
     function handleClick(questionId, answerId) {
         //If answers are not submitted yet
-        if(!submitted){
+        if (!submitted) {
             //map through the questions, update the one that was clicked and set the selected flag to true on it's selected answer.
             console.log(questionId, answerId)
             const updatedQuestions = questions
@@ -14,13 +15,21 @@ export default function Quizz(props) {
             console.log(updatedQuestions)
             setQuestions(updatedQuestions)
             
-        }else{console.log('answers already submitted')}
+
+        } 
+        else { console.log('answers already submitted') }
+        // const score=questions.reduce((prevScore,currentQuestion)=>{
+        //     return currentQuestion.options.some(opt=>opt.correct && opt.selected)?prevScore+1:prevScore
+        // },0)
+        // console.log("Score is ",score)
+        // setScore(score)
     }
 
     function checkAnswers() {
         setSubmitted(true)
     }
     return (<div className="quizz-div">
+        <h1 className='quizz-instructions'>Select the right answers</h1>
         {questions.map(q => {
             return (
                 <div className='quizz-question-wrapper' key={q.id}>
@@ -28,18 +37,25 @@ export default function Quizz(props) {
                     <div className='answers'>
                         {q.options.map(opt =>
                             <button key={opt.id}
-                                className={`answer ${opt.selected ? " selected" : " ignored"}
-                                 ${submitted && opt.correct?" correct":""}
-                                 ${submitted && opt.selected && !opt.correct?" error":""}
+                                className={`answer ${opt.selected ? " selected" : " "}
+                                ${submitted ? opt.selected ? " selected" : " ignored":""}
+                                 ${submitted && opt.correct ? " correct" : ""}
+                                 ${submitted && opt.selected && !opt.correct ? " error" : ""}
                                  `}
-                                 onClick={() => {handleClick(q.id, opt.id) }}>
+                                onClick={() => { handleClick(q.id, opt.id) }}>
                                 {decode(opt.answer)}
                             </button>)}
                     </div>
                 </div>
             )
         })}
-        {submitted?<button className='btn-check-answers' onClick={props.resetGame}>New Game</button>:
-        <button className='btn-check-answers' onClick={checkAnswers}>Check answers</button>}
+        {submitted ? <button className='btn-check-answers' onClick={props.resetGame}>New Game</button> :
+            <button className='btn-check-answers' onClick={checkAnswers}>Check answers</button>
+        }
+        {submitted && <p>{questions.reduce((prevScore,currentQuestion)=>{
+            return currentQuestion.options.some(opt=>opt.correct && opt.selected)?prevScore+1:prevScore
+        },0)}</p>}
+        
+
     </div>)
 }
