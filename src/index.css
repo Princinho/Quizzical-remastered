@@ -28,7 +28,7 @@ img {
 }
 
 .app {
-    width: 600px;
+    /*  width: 600px; */
     min-height: 550px;
     margin: auto;
     background-color: #F5F7FB;
@@ -36,7 +36,9 @@ img {
     justify-content: center;
     align-items: stretch;
 }
-
+#root{
+    padding: 1em;
+}
 .splash {
     display: flex;
     flex-direction: column;
@@ -78,7 +80,7 @@ button {
 .setup-options {
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr minmax(50px,1fr);
     grid-template-rows: repeat(3, 3em) 5em;
     gap: 1em;
     position: relative;
@@ -93,7 +95,7 @@ button {
     opacity: .5;
 }
 .setup-options label {
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 
 .setup-options select {
@@ -125,6 +127,15 @@ button {
 }
 
 
+@media(min-width:800px){
+    .setup-options{
+        font-size: 1.4rem;
+        grid-template-columns: 1fr 1fr;
+    }
+    .setup-options label{
+        font-size: 2rem;
+    }
+}
 .quizz-div{
     display: grid;
     grid-template-columns: repeat(5,1fr);
@@ -133,6 +144,7 @@ button {
 .answers {
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .answer {
@@ -147,14 +159,9 @@ button {
     border-radius: .5rem;
     padding: .5em;
     color: #293264;
-    margin: 0 1em;
+    margin: .5em 1em;
 }
-.answer:first-child{
-    margin-left: 0;
-}
-.answer:last-child{
-    margin-right: 0;
-}
+
 .answer.selected{
     background-color: #D6DBF5;
 }
