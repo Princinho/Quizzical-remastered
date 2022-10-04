@@ -81,8 +81,17 @@ button {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(3, 3em) 5em;
     gap: 1em;
+    position: relative;
 }
-
+.overlay{
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    top: 0;
+    left: 0;
+    background-color: #4D5B9E;
+    opacity: .5;
+}
 .setup-options label {
     font-size: 1.4rem;
 }

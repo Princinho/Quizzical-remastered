@@ -1,5 +1,5 @@
 import React from "react"
-
+import logo from "../assets/logo-complete.PNG"
 export default function Setup(props) {
     
     
@@ -13,7 +13,7 @@ export default function Setup(props) {
         <>
             {props.categories.length > 0 &&
                 <div className="setup-options">
-
+                    {!props.dataReady &&<div className="overlay"></div>}
                     <label htmlFor="questions">Number of questions</label>
                     <select id="questions" name="questions" onChange={handleChange} value={props.settings.questions}>
                         <option value={5}>5</option>
@@ -38,7 +38,7 @@ export default function Setup(props) {
                             return <option value={cat.id} key={cat.id}>{cat.name}</option>
                         })}
                     </select>
-                    <button onClick={props.startGame}>Start game</button>
+                    <button disabled={!props.dataReady} onClick={props.startGame}>Start game</button>
                 </div>
             }
         </>
