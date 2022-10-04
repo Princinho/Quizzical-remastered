@@ -41,12 +41,15 @@ export default function Quizz(props) {
                 </div>
             )
         })}
+        <div className='quizz-footer'>
         {submitted ? <button className='btn-check-answers' onClick={props.resetGame}>New Game</button> :
             <button className='btn-check-answers' onClick={checkAnswers}>Check answers</button>
         }
-        {submitted && <p>{questions.reduce((prevScore,currentQuestion)=>{
+        {submitted && <p className='final-score'>You found {questions.reduce((prevScore,currentQuestion)=>{
             return currentQuestion.options.some(opt=>opt.correct && opt.selected)?prevScore+1:prevScore
-        },0)}</p>}
+        },0)} right answers</p>}
+        </div>
+        
         
 
     </div>)

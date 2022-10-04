@@ -204,3 +204,9 @@ background-color: #F6D9DB;
 .correct,.answer.answer.selected.correct{
     background: #94D7A2;    
 }
+.quizz-footer{
+    grid-column: 1/-1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
