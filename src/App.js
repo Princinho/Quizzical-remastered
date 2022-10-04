@@ -15,16 +15,15 @@ function App() {
 
   React.useEffect(() => {
     //recuperer les categories
-    console.log('fetching categories')
     fetch('https://opentdb.com/api_category.php')
         .then(res => res.json())
         .then(data => setCategories(data.trivia_categories))
 }, [])
 
   React.useEffect(()=>{
-    console.log('settings changed',settings)
+    if(gameStarted)
     setQuizzQuestions(generateNewQuizz(settings.questions,settings.category,settings.difficulty))
-  },[settings])
+  },[gameStarted])
 
   // React.useEffect(() => {
   //   if (gameStarted) {
@@ -35,8 +34,6 @@ function App() {
   // }, [gameStarted, settings,settings.questions])
 
   function generateNewQuizz(questions,category,difficulty){
-    console.log(settings.questions+" questions fetching")
-    console.log(`fetching new questions Cat:${questions} diff ${category} count ${difficulty}`)
       let url = `https://opentdb.com/api.php?amount=${questions}${category ? "&category=" + category : ""}${difficulty ? "&difficulty=" + difficulty : ""}`.trim()
       fetch(url).then(res => res.json()).then(data => {
         // setApiQuestions(data.results)
@@ -53,7 +50,6 @@ function App() {
           }
           return parsedQuestion
         })
-        console.log("fetching new questions")
         setQuizzQuestions(parsedQuestions)
       })
   }
@@ -67,7 +63,6 @@ function App() {
     setSettings(prevSettings => {
       return { ...prevSettings, [name]: value }
     })
-    console.log(settings)
   }
   function startGame() {
     setShowSetupScreen(false)
@@ -77,12 +72,11 @@ function App() {
     setGameStarted(false)
     setShowSetupScreen(true)
   }
-  console.log(quizzQuestions)
   return (
     <div className="app">
       {showSplash && <Splash hideSplash={hideSplash} />}
       {showSetupScreen && <Setup settings={settings} startGame={startGame} dataReady={quizzQuestions?true:false} categories={categories} updateSettings={updateSettings} />}
-      {(gameStarted && quizzQuestions.length > 0) && <Quizz data={quizzQuestions} resetGame={resetGame} />}
+      {(gameStarted && quizzQuestions) && <Quizz data={quizzQuestions} resetGame={resetGame} />}
     </div>
   );
 }

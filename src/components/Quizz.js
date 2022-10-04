@@ -8,21 +8,13 @@ export default function Quizz(props) {
         //If answers are not submitted yet
         if (!submitted) {
             //map through the questions, update the one that was clicked and set the selected flag to true on it's selected answer.
-            console.log(questionId, answerId)
             const updatedQuestions = questions
                 .map(q => q.id !== questionId ? q :
                     { ...q, options: q.options.map(o => o.id !== answerId ? { ...o, selected: false } : { ...o, selected: !o.selected }) })
-            console.log(updatedQuestions)
             setQuestions(updatedQuestions)
             
 
         } 
-        else { console.log('answers already submitted') }
-        // const score=questions.reduce((prevScore,currentQuestion)=>{
-        //     return currentQuestion.options.some(opt=>opt.correct && opt.selected)?prevScore+1:prevScore
-        // },0)
-        // console.log("Score is ",score)
-        // setScore(score)
     }
 
     function checkAnswers() {
